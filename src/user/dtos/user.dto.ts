@@ -1,13 +1,17 @@
-import { Exclude, Expose } from '@nestjs/class-transformer';
+import { Expose } from 'class-transformer';
+import { TransformObjectId } from 'src/utils/expose-id.decorator';
 
-@Exclude()
 export class UserDto {
+  @TransformObjectId()
   @Expose()
   _id!: string;
+
+  @Expose()
+  email!: string;
 
   @Expose()
   name!: string;
 
   @Expose()
-  email!: string;
+  password?: string;
 }

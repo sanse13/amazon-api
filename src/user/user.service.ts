@@ -1,16 +1,24 @@
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { User, UserDocument } from './user.schema';
-import { Model } from 'mongoose';
-import { StrictFilterQuery } from 'src/utils/types';
+import { UserDto } from './dtos/user.dto';
 
 @Injectable()
 export class UserService {
-  constructor(@InjectModel(User.name) public userModel: Model<User>) {}
+  private readonly users: UserDto[] = [
+    {
+      _id: '1',
+      email: 'test@test.test',
+      name: 'John',
+      password: 'casa',
+    },
+    {
+      _id: '2',
+      email: 'defaultUser@test.test',
+      name: 'Adrian',
+      password: 'casa123',
+    },
+  ];
 
-  async findOne(
-    filter: StrictFilterQuery<UserDocument>,
-  ): Promise<UserDocument | null> {
-    return this.userModel.findOne(filter).exec();
+  async findOne(email: string): Promise<UserDto | undefined> {
+    return this.users.find((user) => user.email === email);
   }
 }

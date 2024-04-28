@@ -6,4 +6,10 @@ export class CreateProductDto {
 
   @Exclude()
   price!: number;
+
+  @Exclude()
+  imageRef!: string;
+
+  @Exclude()
+  description!: string;
 }

@@ -1,6 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
-import { UserDto } from 'src/user/dtos/user.dto';
+import { UserDto } from '../user/dtos/user.dto';
 import { AuthService } from './auth.service';
 import { SignInDto } from './dtos/sign-in.dto';
 

@@ -14,5 +14,5 @@ export class UserDto {
   name!: string;
 
   @Expose()
-  password?: string;
+  password!: string;
 }

@@ -1,5 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { compareSync } from 'bcrypt';
 import { UserService } from '../user/user.service';
 
 interface JwtResponse {
@@ -15,11 +16,11 @@ export class AuthService {
 
   async signIn(email: string, pass: string): Promise<JwtResponse> {
     const user = await this.userService.findOne(email);
-    if (user?.password !== pass) {
+    if (!compareSync(pass, user!.password)) {
       throw new UnauthorizedException();
     }
 
-    const jwtPayload = { sub: user._id, email: user.email };
+    const jwtPayload = { sub: user!._id, email: user!.email };
     return {
       access_token: await this.jwtService.signAsync(jwtPayload),
     };

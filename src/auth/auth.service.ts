@@ -15,7 +15,7 @@ export class AuthService {
   ) {}
 
   async signIn(email: string, pass: string): Promise<JwtResponse> {
-    const user = await this.userService.findOne(email);
+    const user = await this.userService.findOne({ email });
     if (!compareSync(pass, user!.password)) {
       throw new UnauthorizedException();
     }

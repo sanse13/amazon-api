@@ -12,7 +12,4 @@ export class UserDto {
 
   @Expose()
   name!: string;
-
-  @Expose()
-  password!: string;
 }
